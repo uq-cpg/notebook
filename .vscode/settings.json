@@ -150,5 +150,8 @@
         "**/*.fls": true,
         "**/*.synctex.gz": true,
         "**/*.toc": true
+    },
+    "files.associations": {
+        "vector": "cpp"
     }
 }

@@ -26,3 +26,5 @@
 ## minted
 _minted*
 *.pyg
+
+.env/
