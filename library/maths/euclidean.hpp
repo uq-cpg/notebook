@@ -1,14 +1,21 @@
-// Euclidean algorithm for GCD & LCM
-// https://cp-algorithms.com/algebra/euclid-algorithm.html
-
 #pragma once
+
 #include <bits/stdc++.h>
 
-int gcd (int a, int b) {
-    return b ? gcd (b, a % b) : a;
+using namespace std;
+
+template <typename T>
+T gcd(T a, T b) {
+    if (a < b) swap(a, b);
+    while (b != 0) {
+        int r = a % b;
+        a = b;
+        b = r;
+    }
+    return a;
 }
 
-// lcm(a,b) = a*b/(gcd(a,b))
-int lcm (int a, int b) {
-    return a / gcd(a, b) * b;
+template <typename T>
+int64_t lcm(T a, T b) {
+    return (int64_t) a / gcd(a, b) * b;
 }

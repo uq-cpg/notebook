@@ -3,6 +3,7 @@
 #include <bits/stdc++.h>
 #include "point.hpp"
 #include "geoutil.hpp"
+#include "../maths/euclidean.hpp"
 
 using namespace std;
 
@@ -41,7 +42,7 @@ struct Polygon {
             P p1 = ps[i];
             P p2 = ps[j];
             P v = p2 - p1;
-            res += __gcd(abs(v.x), abs(v.y));
+            res += gcd(abs(v.x), abs(v.y));
         }
         return res;
     }
