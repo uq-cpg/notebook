@@ -1,0 +1,31 @@
+\documentclass[fontsize=8pt,paper=landscape,usegeometry=true]{scrartcl}
+
+% Encoding
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% Margins
+\usepackage[margin=1cm]{geometry}
+
+% MULTICOLS
+\usepackage{multicol}
+\setlength\columnsep{30pt}
+
+% CODE
+\usepackage{minted}
+\renewcommand{\MintedPygmentize}{.env/bin/pygmentize}
+\setminted{
+  breaklines,
+  linenos,
+  frame=lines,
+  framesep=2mm,
+  baselinestretch=1.2,
+  mathescape=true
+}
+
+\begin{document}
+  \begin{multicols*}{2}
+    \tableofcontents
+    \input{content}
+  \end{multicols*}
+\end{document}
