@@ -5,6 +5,7 @@
 - Any Latex distribution
 - `latexmk`
 - `python3`
+- `make`
 
 ## Setup
 
