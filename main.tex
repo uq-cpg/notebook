@@ -7,11 +7,15 @@
 % Margins
 \usepackage[margin=1cm]{geometry}
 
-% MULTICOLS
+% Multicols
 \usepackage{multicol}
 \setlength\columnsep{30pt}
 
-% CODE
+% Font
+\renewcommand{\familydefault}{\sfdefault}
+
+% Code
+\usepackage{listings}
 \usepackage{minted}
 \renewcommand{\MintedPygmentize}{.env/bin/pygmentize}
 \setminted{
@@ -23,9 +27,23 @@
   mathescape=true
 }
 
+% Remove spaces
+\usepackage{etoolbox}
+\newcommand{\zerodisplayskips}{%
+  \setlength{\abovedisplayskip}{0pt}%
+  \setlength{\belowdisplayskip}{0pt}%
+  \setlength{\abovedisplayshortskip}{0pt}%
+  \setlength{\belowdisplayshortskip}{0pt}}
+\appto{\normalsize}{\zerodisplayskips}
+\appto{\small}{\zerodisplayskips}
+\appto{\footnotesize}{\zerodisplayskips}
+
+\usepackage{indentfirst}
+
 \begin{document}
-  \begin{multicols*}{2}
+  \begin{multicols*}{3}
     \tableofcontents
     \input{content}
+    \input{stl}
   \end{multicols*}
 \end{document}

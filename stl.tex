@@ -1,0 +1,109 @@
+\section{C++ STL}
+  \subsection{\lstinline{vector}}
+  \par \textbf{Underlying implementation}: dynamic array
+  \begin{table}[H]
+    \begin{tabular}{|l|l|}
+    \hline
+    \textbf{Method}      & \textbf{Complexity}      \\ \hline
+    size\_t size()                   & $O(1)$     \\ \hline
+    void push\_back(T v)             & $O(1)$     \\ \hline
+    void emplace\_back(Args args...) & $O(1)$     \\ \hline
+    void pop\_back()                 & $O(1)$     \\ \hline
+    T back()                         & $O(1)$     \\ \hline
+    void erase(iterator position)    & $O(n)$     \\ \hline
+    \end{tabular}
+  \end{table}
+  \begin{itemize}
+    \item Resize (values in vector stay unchanged): \lstinline{v.resize(n)}
+    \item Resize and fill: \lstinline{v.assign(n, val)}
+    \item Fill: \lstinline{fill(v.begin(), v.end(), val)}
+    \item Reverse: \lstinline{reverse(v.begin(), v.end())}
+    \item Pythonic get element backwards:
+      \begin{itemize}
+        \item \lstinline{v.end()[-1]}: last element
+        \item \lstinline{v.end()[-2]}: second-last element
+      \end{itemize}
+    \item Sort ():
+\begin{minted}{cpp}
+// by default: non-decreasing, v must be of comparator type
+sort(v.begin(), v.end());
+// custom comparator
+sort(v.begin(), v.end(), [](const Obj& o1, const Obj& o2) {
+  return o1.x < o2.x;
+});
+\end{minted}
+  \end{itemize}
+
+  \subsection{\lstinline{set}}
+  \par \textbf{Condition}: must be of a comparable type (define the \lstinline{<} operator).
+  \par \textbf{Underlying implementation}: self-balancing BST
+  \begin{table}[H]
+    \begin{tabular}{|l|l|}
+    \hline
+    \textbf{Method}      & \textbf{Complexity}      \\ \hline
+    size\_t size()                   & $O(1)$          \\ \hline
+    void insert(T v)                 & $O(1)$          \\ \hline
+    void emplace(Args args...)       & $O(1)$          \\ \hline
+    iterator find(T v)               & $O(\log(n))$    \\ \hline
+    void erase(iterator position)    & $O(\log(n))$    \\ \hline
+    \end{tabular}
+  \end{table}
+  \begin{itemize}
+    \item Check if an element v is in set s: \lstinline{if (s.find(v) != s.end())}
+    \item Get minimum element: \lstinline{*(m.begin())}
+    \item Get maximum element: \lstinline{*(m.rbegin())}
+  \end{itemize}
+
+  \subsection{\lstinline{map}}
+  \par \textbf{Condition}: \textbf{key} must be of a comparable type (define the \lstinline{<} operator).
+  \par \textbf{Underlying implementation}: self-balancing BST
+  \begin{table}[H]
+    \begin{tabular}{|l|l|}
+    \hline
+    \textbf{Method}      & \textbf{Complexity}      \\ \hline
+    size\_t size()                   & $O(1)$          \\ \hline
+    void insert(pair<K, V> keyvalpair) & $O(1)$          \\ \hline
+    void emplace(K key, V value)     & $O(1)$          \\ \hline
+    iterator find(T v)               & $O(\log(n))$    \\ \hline
+    void erase(iterator position)    & $O(\log(n))$    \\ \hline
+    \end{tabular}
+  \end{table}
+  \begin{itemize}
+    \item Check if a key k is in map m: \lstinline{if (m.find(k) != m.end())}
+    \item Get value of key k in map m: \lstinline{m[k]} or \lstinline{m.find(k)->second}
+    \item Get minimum key-value pair: \lstinline{*(m.begin())}
+    \item Get key of minimum pair: \lstinline{m.begin()->first}
+    \item Get value of minimum pair: \lstinline{m.begin()->second}
+    \item Get maximum key-value pair: \lstinline{*(m.rbegin())}
+    \item Get key of maximum pair: \lstinline{m.rbegin()->first}
+    \item Get value of maximum pair: \lstinline{m.rbegin()->second}
+  \end{itemize}
+
+  \subsection{unordered\_set and unordered\_map}
+  \par \textbf{Underlying implementation}: hash table
+  \par \textbf{Note}: stay always from these unless you know what you are doing. There are scenarios where you think these can be faster than set and map, but either:
+  \begin{itemize}
+    \item The speed-up it will be negligible
+    \item It will actually be unexpectedly slower
+  \end{itemize}
+  \par \textbf{Operations}: pretty much share the same interface with set and map, except for things that require order.
+
+  \subsection{pair}
+  \par Lexicographically comparable
+
+  \subsection{string}
+  \begin{itemize}
+    \item Mutable: \lstinline{s[0] = 'a'} is OK.
+    \item Concatenation:
+      \begin{itemize}
+        \item \lstinline{s += 'a'} takes $O(1)$!
+        \item \lstinline{s += t} takes $O(length(t))$
+      \end{itemize}
+    \item Substring:
+      \begin{itemize}
+        \item \lstinline{s.substr(i)} returns suffix starting from $i$
+        \item \lstinline{s.substr(i, 3)} returns suffix starting from $i$ of maximum length $3$ (can be shorter if reaches end)
+      \end{itemize}
+    \end{itemize}
+  \subsection{Other useful utilities}
+  \par min(x, y), max(x, y), swap(x, y)
