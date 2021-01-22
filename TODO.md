@@ -4,7 +4,7 @@
 
 - [x] [Dijkstra](https://judge.yosupo.jp/problem/shortest_path)
 - [x] [Strongly Connected Components](https://judge.yosupo.jp/problem/scc)
-- [ ] [Lowest Common Ancestor](https://judge.yosupo.jp/problem/lca)
+- [x] [Lowest Common Ancestor](https://judge.yosupo.jp/problem/lca)
 
 ## Maths
 
@@ -18,7 +18,6 @@
 
 - [x] [Z-algorithm](https://judge.yosupo.jp/problem/zalgorithm)
 - [x] [Suffix array](https://judge.yosupo.jp/problem/suffixarray)
-- [ ] [Number of substrings](https://judge.yosupo.jp/problem/number_of_substrings)
 
 ## Matching
 
