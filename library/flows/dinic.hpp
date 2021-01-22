@@ -6,6 +6,7 @@ using namespace std;
 
 /// Dinic algorithm for max flow
 /// This versionshould work on flow graph with float capacities
+/// Time complexity: $O(|V|^2 |E|)$
 
 template <typename T>
 struct FlowEdge {
