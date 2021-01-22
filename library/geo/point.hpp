@@ -12,23 +12,14 @@ struct Point {
     T x, y;
 
     Point(T x_ = 0, T y_ = 0) : x(x_), y(y_) {}
-
     P operator+(const P &o) const { return P(x + o.x, y + o.y); }
-
     P operator-(const P &o) const { return P(x - o.x, y - o.y); }
-
     P operator*(T d) const { return P(x * d, y * d); }
-
     P operator/(T d) const { return P(x / d, y / d); }
-
     T dot(P o) const { return x * o.x + y * o.y; }
-
     T cross(P o) const { return x * o.y - y * o.x; }
-
     T abs2() const { return x * x + y * y; }
-
     long double abs() const { return sqrt((long double) abs2()); }
-
     double angle() const { return atan2(y, x); } // $[-\pi, \pi]$
     P unit() const { return *this / abs(); } // makes abs()=1
     P perp() const { return P(-y, x); } // rotates $+\pi/2$
@@ -85,8 +76,8 @@ struct Point {
 
         // check if one line is completely on one side of the other
         for (int i = 0; i < 2; i++) {
-            if (sgn((p2 - p1).cross(p3 - p1)) == sgn((p2 - p1).cross(p4 - p1))
-                && sgn((p2 - p1).cross(p3 - p1)) != 0) {
+            if (sgn(orient(p1, p2, p3)) == sgn(orient(p1, p2, p4))
+                && sgn(orient(p1, p2, p3)) != 0) {
                 return false;
             }
             swap(p1, p3);
