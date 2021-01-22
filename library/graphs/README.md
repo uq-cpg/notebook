@@ -1,9 +1,13 @@
 # Testing
 
-## `dijkstra.cc`
+## `dijkstra.cpp`
 
 - https://judge.yosupo.jp/submission/36474
 
-## `scc.cc`
+## `scc.cpp`
 
 - https://judge.yosupo.jp/submission/36509
+
+## `lca.cpp`
+
+- https://judge.yosupo.jp/submission/36531
