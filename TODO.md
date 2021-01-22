@@ -17,6 +17,6 @@
 
 ## Strings
 
-- [ ] [Z-algorithm](https://judge.yosupo.jp/problem/zalgorithm)
-- [ ] [Suffix array](https://judge.yosupo.jp/problem/suffixarray)
+- [x] [Z-algorithm](https://judge.yosupo.jp/problem/zalgorithm)
+- [x] [Suffix array](https://judge.yosupo.jp/problem/suffixarray)
 - [ ] [Number of substrings](https://judge.yosupo.jp/problem/number_of_substrings)
