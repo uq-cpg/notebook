@@ -16,6 +16,8 @@
   - https://cses.fi/problemset/task/1095
 - `pow()` tested on:
   - https://cses.fi/problemset/task/1095
+- compatibility with `matrix.hpp` :
+  - https://judge.yosupo.jp/submission/36497
 
 ### `binomial_coefficient.hpp`
 
@@ -25,3 +27,7 @@
 ### `eratosthenes.hpp`
 
 - https://judge.yosupo.jp/submission/36442
+
+### `matrix`
+
+- https://judge.yosupo.jp/submission/36497

@@ -8,7 +8,7 @@
 
 ## Maths
 
-- [ ] [Determinant](https://judge.yosupo.jp/problem/matrix_det)
+- [x] [Determinant](https://judge.yosupo.jp/problem/matrix_det)
 
 ## Structures
 
