@@ -3,7 +3,7 @@
 ## Graphs
 
 - [x] [Dijkstra](https://judge.yosupo.jp/problem/shortest_path)
-- [ ] [Strongly Connected Components](https://judge.yosupo.jp/problem/scc)
+- [x] [Strongly Connected Components](https://judge.yosupo.jp/problem/scc)
 - [ ] [Lowest Common Ancestor](https://judge.yosupo.jp/problem/lca)
 
 ## Maths
