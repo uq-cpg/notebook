@@ -7,3 +7,7 @@
 ## `z_function.hpp`
 
 - https://judge.yosupo.jp/submission/36483
+
+## `suffix_array.hpp`
+
+https://judge.yosupo.jp/submission/36486
