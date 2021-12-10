@@ -1,20 +1,16 @@
 #pragma once
 
 #include <bits/stdc++.h>
-
 using namespace std;
 
 /// Dinic algorithm for max flow
 /// This versionshould work on flow graph with float capacities
 /// Time complexity: $O(|V|^2 |E|)$
-
 template <typename T>
 struct FlowEdge {
     int u, v;
     T c, f;
-
-    FlowEdge(int _u, int _v, T _c, T _f) :
-            u(_u), v(_v), c(_c), f(_f) {}
+    FlowEdge(int _u, int _v, T _c, T _f) : u(_u), v(_v), c(_c), f(_f) {}
 };
 
 template <typename T>
@@ -44,11 +40,9 @@ struct Dinic {
         level[s] = 0;
         queue<int> q;
         q.push(s);
-
         while (!q.empty()) {
             int u = q.front();
             q.pop();
-
             for (int eid : adj[u]) {
                 const auto& e = edges[eid];
                 if (e.c - e.f <= eps || level[e.v] != -1) continue;
@@ -56,13 +50,11 @@ struct Dinic {
                 q.push(e.v);
             }
         }
-
         return level[t] != -1;
     }
 
     T dfs(int u, T flow) {
         if (u == t) return flow;
-
         for (int& j = ptr[u]; j < (int) adj[u].size(); j++) {
             int eid = adj[u][j];
             const auto& e = edges[eid];
@@ -75,13 +67,11 @@ struct Dinic {
                 }
             }
         }
-
         return 0;
     }
 
     T maxFlow() {
         T f = 0;
-
         while (bfs()) {
             fill(ptr.begin(), ptr.end(), 0);
             T total_df = 0;
@@ -93,7 +83,6 @@ struct Dinic {
             if (total_df <= eps) break;
             f += total_df;
         }
-
         return f;
     }
 };

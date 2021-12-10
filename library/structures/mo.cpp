@@ -1,65 +1,27 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
 struct Query {
     int from, to, index;
-    Query(int from, int to, int index) :
-        from(from), to(to), index(index) {}
+    Query(int f, int t, int i) : from(f), to(t), index(i) {}
 };
 
 struct MoSolver {
     vector<int> a;
     vector<Query> queries;
-    int n;
-    int k;
-    int total;
-    unordered_map<int, int> freq;
 
-    MoSolver(vector<int>& a, vector<Query>& queries, int n, int k)
-        : a(a), queries(queries), n(n), k(k), total(0) {}
+    MoSolver(vector<int>& a_) : a(a_) {}
 
-    void add(int index) {
-        int x = a[index];
-        if (freq.find(x) == freq.end()) freq[x] = 0;
-        int y = k - x;
+    virtual void add(int index) = 0; // add a[index] to current range
+    virtual void remove(int index) = 0; // remove a[index] from current range
+    virtual int getAnswer() = 0; // get result of current range
 
-        if (freq.find(y) != freq.end()) {
-            if (y != x) {
-                if (freq[y] > freq[x]) {
-                    total++;
-                }
-            } else {
-                if (freq[x] % 2 == 1) {
-                    total++;
-                }
-            }
-        }
-
-        freq[x]++;
-    }
-
-    void remove(int index) {
-        int x = a[index];
-        int y = k - x;
-
-        if (freq.find(y) != freq.end()) {
-            if (y != x) {
-                if (freq[y] >= freq[x]) {
-                    total--;
-                }
-            } else {
-                if (freq[x] % 2 == 0) {
-                    total--;
-                }
-            }
-        }
-
-        freq[x]--;
+    void addQuery(int from, int to) {
+        queries.emplace_back(from, to, queries.size());
     }
 
     vector<int> solve() {
-        const int blockSize = sqrt(n);
+        const int blockSize = 700;
         sort(queries.begin(), queries.end(),
             [&](const Query& q1, const Query& q2) {
                 if (q1.from / blockSize != q2.from / blockSize) {
@@ -68,73 +30,60 @@ struct MoSolver {
                 return q1.to < q2.to;
             }
         );
-
         vector<int> ans(queries.size());
-
         int from = 0, to = -1;
-
         for (Query& q : queries) {
             while (from > q.from) {
-                from--;
-                add(from);
+                from--; add(from);
             }
             while (to < q.to) {
-                to++;
-                add(to);
+                to++; add(to);
             }
             while (from < q.from) {
-                remove(from);
-                from++;
+                remove(from); from++;
             }
             while (to > q.to) {
-                remove(to);
-                to--;
+                remove(to); to--;
             }
-            ans[q.index] = total;
+            ans[q.index] = getAnswer();
         }
-
         return ans;
     }
 };
 
-struct Solver {
-    Solver(int n, int m, int k) {
-        vector<int> a(n);
+struct Solver : MoSolver { // https://www.spoj.com/problems/DQUERY/
+    const int MAX = 1e6 + 1;
+    vector<int> cnt;
+    int distinct;
 
-        for (int i = 0; i < n; i++) {
-            cin >> a[i];
-        }
+    Solver(vector<int>& a_) : MoSolver(a_), cnt(MAX, 0), distinct(0) {}
 
-        vector<Query> queries;
+    void add(int index) {
+        if (cnt[a[index]] == 0) distinct++;
+        cnt[a[index]]++;
+    }
 
-        for (int i = 0; i < m; i++) {
-            int from, to;
-            cin >> from >> to;
-            from--; to--;
-            if (from > to) swap(from, to);
-            queries.emplace_back(from, to, i);
-        }
+    void remove(int index) {
+        if (cnt[a[index]] == 1) distinct--;
+        cnt[a[index]]--;
+    }
 
-        MoSolver moSolver(a, queries, n, k);
-        vector<int> ans = moSolver.solve();
-
-        for (int i = 0; i < (int) ans.size(); i++) {
-            cout << ans[i] << '\n';
-        }
+    int getAnswer() {
+        return distinct;
     }
 };
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
-
-    while (true) {
-        int n, m, k;
-        cin >> n >> m >> k;
-        if (n == 0 && m == 0 && k == 0) break;
-        Solver(n, m, k);
-        cout << "\n";
+    ios_base::sync_with_stdio(0); cin.tie(0);
+    int n; cin >> n;
+    vector<int> a(n); for (int i = 0; i < n; i++) cin >> a[i];
+    int q; cin >> q;
+    Solver solver(a);
+    for (int i = 0; i < q; i++) {
+        int from, to; cin >> from >> to; from--; to--;
+        solver.addQuery(from, to);
     }
-
+    vector<int> ans = solver.solve();
+    for (int x : ans) cout << x << '\n';
     return 0;
 }

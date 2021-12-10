@@ -8,10 +8,10 @@ using namespace std;
 
 struct Graph {
     int n;
-    int log_h_max; // log_2(max_height) = log_2(n)
+    int log_h_max; // $\approx \max(\log_2(h)) \leq \log_2(n)$
     vector<vector<int>> adj;
     vector<int> depth;
-    vector<vector<int>> p; // p[u][j]: (2^j)th ancestor/predecessor of u
+    vector<vector<int>> p; // p[u][j]: $2^j$th ancestor/predecessor of $u$
 
     Graph(int n_) : n(n_), adj(n), depth(n, 0) {
         log_h_max = 1;

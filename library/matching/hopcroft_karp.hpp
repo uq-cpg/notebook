@@ -31,7 +31,6 @@ struct HopcroftKarp {
     bool bfs() {
         // Find all possible augmenting paths
         queue<int> q;
-
         for (int u = 0; u < nu; u++) {
             // Consider only unmatched edges
             if (u_mate[u] == -1) {
@@ -41,13 +40,10 @@ struct HopcroftKarp {
                 layer[u] = INF;
             }
         }
-
         bool has_path = false;
-
         while (!q.empty()) {
             int u = q.front();
             q.pop();
-
             for (int &v : adj[u]) {
                 if (v_mate[v] == -1) {
                     has_path = true;
@@ -57,13 +53,11 @@ struct HopcroftKarp {
                 }
             }
         }
-
         return has_path;
     }
 
     bool dfs(int u) {
         if (layer[u] == INF) return false;
-
         for (int v : adj[u]) {
             if ((v_mate[v] == -1) ||
                 (layer[v_mate[v]] == layer[u] + 1 && dfs(v_mate[v]))) {
@@ -72,13 +66,11 @@ struct HopcroftKarp {
                 return true;
             }
         }
-
         return false;
     }
 
     vector<pair<int, int>> maxMatching() {
         int matching = 0;
-
         while (bfs()) { // there is at least 1 augmenting path
             for (int u = 0; u < nu; u++) {
                 if (u_mate[u] == -1 && dfs(u)) {
@@ -86,9 +78,7 @@ struct HopcroftKarp {
                 }
             }
         }
-
         vector<pair<int, int>> res;
-
         for (int u = 0; u < nu; u++) {
             if (u_mate[u] == -1) continue;
             res.emplace_back(u, u_mate[u]);
